@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - DAHX Sofas</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <h1>DAHX Sofas</h1>
+            <p>Revolutionizing Comfort and Convenience</p>
+        </div>
+    </header>
+    <nav>
+        <div class="header">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="orders.html">Orders</a></li>
+                <li><a href="about_us.html">About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section id="order-confirmation" class="container">
+        <h2>Order Confirmation</h2>
+        <p>Thank you for your purchase, <span id="customer-name"></span>!</p>
+        <p>Your order has been successfully placed. Below are the details of your order:</p>
+        <div class="order-details">
+            <p><strong>Order Number:</strong> <span id="order-number"></span></p>
+            <p><strong>Product:</strong> <span id="product-name"></span></p>
+            <p><strong>Color:</strong> <span id="color"></span></p>
+            <p><strong>Quantity:</strong> <span id="quantity"></span></p>
+            <p><strong>Shipping Address:</strong> <span id="shipping-address"></span></p>
+            <p><strong>Total Price:</strong> $<span id="total-price"></span></p>
+        </div>
+        <p>You will receive an email confirmation shortly with all the details of your order. If you have any questions or need further assistance, please contact us at <a href="mailto:info@chillnfill.com">info@chillnfill.com</a>.</p>
+    </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 DAHX Sofas</p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const customerName = params.get('name');
+            const productName = params.get('product');
+            const quantity = params.get('quantity');
+            const address = params.get('address');
+            const color = params.get('color');
+            const totalPrice = params.get('totalPrice');
+
+            console.log('Product:', productName); // Log product name to console
+            console.log('Total Price:', totalPrice); // Log total price to console
+
+            function generateOrderNumber() {
+                return + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+            }
+
+            function capitalizeFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+
+            if (customerName && productName && quantity && address && color && totalPrice) {
+                document.getElementById('customer-name').textContent = customerName;
+                document.getElementById('product-name').textContent = productName.split(' ').map(capitalizeFirstLetter).join(' ');
+                document.getElementById('quantity').textContent = quantity;
+                document.getElementById('shipping-address').textContent = address;
+                document.getElementById('color').textContent = capitalizeFirstLetter(color);
+                document.getElementById('total-price').textContent = totalPrice;
+                document.getElementById('order-number').textContent = generateOrderNumber();
+            } else {
+                console.error('Missing order details.');
+            }
+        });
+    </script>
+</body>
+</html>
